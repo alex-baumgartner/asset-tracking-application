@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
-using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace AssetTrackingApplication
 {
@@ -386,29 +385,6 @@ namespace AssetTrackingApplication
             DeactivateControls();
             _excel.CloseExcelFile();
             btn_save.Enabled = false;
-        }
-    }
-    public class Excel
-    {
-        public Excel(string fileName)
-        {
-            FileName = fileName;
-            Application = new Application();
-            Workbook = Application.Workbooks.Open(FileName, ReadOnly: false, Editable: true);
-            Worksheet = Workbook.Worksheets.Item[1];
-        }
-        public string FileName { get; set; }
-        public Application Application { get; set; }
-        public Workbook Workbook { get; set; }
-        public Worksheet Worksheet { get; set; }
-
-        public void CloseExcelFile()
-        {
-            Workbook.Close(true, FileName);
-            Application.Quit();
-            Marshal.ReleaseComObject(Worksheet);
-            Marshal.ReleaseComObject(Workbook);
-            Marshal.ReleaseComObject(Application);
         }
     }
 }
