@@ -128,7 +128,6 @@ namespace AssetTrackingApplication
         #endregion toggleControls
 
         #region staticExcelData
-        // AssetList - insert new Assets here:
         public Dictionary<string, int> CreateAssetList() {
             var assetList = new Dictionary<string, int> {
                 {"Raiffeisen Nachhaltigkeits Fond", 2},
