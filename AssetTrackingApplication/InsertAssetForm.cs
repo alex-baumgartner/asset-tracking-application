@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
+using Newtonsoft.Json;
 
 namespace AssetTrackingApplication
 {
@@ -29,8 +30,8 @@ namespace AssetTrackingApplication
             ClearUpdateDataTextBoxes();
             
             var assetName = cb_assetName.Text;
-            var assetList = CreateAssetList();
-            var columns = CreateColumnList();
+            var assetList = GetAssetList();
+            var columns = GetColumnList();
             var assetRow = GetAssetRow(assetList, assetName);
             InsertPreviousInsertionValuesToTextboxes(_excel.Worksheet, assetRow, columns);
 
@@ -39,8 +40,8 @@ namespace AssetTrackingApplication
         private void btn_insertData_Click(object sender, EventArgs e) {
             // deactivate controls
             ToggleInsertionControls(false);
-            var assetList = CreateAssetList();
-            var columns = CreateColumnList();
+            var assetList = GetAssetList();
+            var columns = GetColumnList();
             try {
                 // Get parameters for storing asset in _excel (parameters from excel, winforms)
                 var assetName = cb_assetName.Text;
@@ -74,15 +75,15 @@ namespace AssetTrackingApplication
             ClearInsertionDataTextBoxes();
 
             var assetName = cb_assetName.Text;
-            var assetList = CreateAssetList();
-            var columns = CreateColumnList();
+            var assetList = GetAssetList();
+            var columns = GetColumnList();
             var assetRow = GetAssetRow(assetList, assetName);
             InsertPreviousUpdateValuesToTextboxes(_worksheet, assetRow, columns);
         }
         private void btn_updateData_Click(object sender, EventArgs e) {
             ToggleUpdateControls(false);
-            var assetList = CreateAssetList();
-            var columns = CreateColumnList();
+            var assetList = GetAssetList();
+            var columns = GetColumnList();
 
             try {
                 // Get parameters for storing asset in _excel (parameters from _excel, winforms)
@@ -127,61 +128,23 @@ namespace AssetTrackingApplication
         }
         #endregion toggleControls
 
-        #region staticExcelData
+        #region File management for excel data
         // AssetList - insert new Assets here:
-        public Dictionary<string, int> CreateAssetList() {
-            var assetList = new Dictionary<string, int> {
-                {"Raiffeisen Nachhaltigkeits Fond", 2},
-                {"Raiffeisen Dividenden Fond", 3},
-                {"Bausparkonto", 10},
-                {"Giro Konto", 11},
-                {"Flatex Konto", 12},
-                {"Binance Konto", 13},
-                {"Gemini Konto", 14},
-                {"Bitpanda Konto", 15},
-                {"Bitcoin", 20},
-                {"Etherium", 21},
-                {"Compound", 22},
-                {"Uniswap", 23},
-                {"Cardano", 24},
-                {"XRP", 25},
-                {"Graph", 26},
-                {"Polkadot", 27},
-                {"Chainlink", 28},
-                {"MSCI World (ACC)", 40},
-                {"MSCI Emerging Markets (ACC)", 41},
-                {"MSCI Europe Small Cap (ACC)", 42},
-                {"Corsair [CRSR]", 50},
-                {"Tesla [TSLA]", 51},
-                {"Paypal [PYPL]", 52},
-                {"Raiffeisen", 53},
-                {"Alphabet [GOOGL]", 54}
-            };
+        public Dictionary<string, int> GetAssetList() {
+            var fileContent = File.ReadAllText("AssetList.json");
+            var assetList = JsonConvert.DeserializeObject<Dictionary<string, int>>(fileContent);
 
             return assetList;
         }
 
-        public Dictionary<string, string> CreateColumnList() {
-            var columns = new Dictionary<string, string> {
-                {"Name", "A"},
-                {"AssetClass", "B"},
-                {"TotalValue", "C"},
-                {"PreviousValue", "D"},
-                {"InvestedCapital", "E"},
-                {"PricePerShare", "F"},
-                {"CostBasis", "G"},
-                {"Performance", "H"},
-                {"GainRelative", "I"},
-                {"GainTotal", "J"},
-                {"AssetShare", "K"},
-                {"Amount", "L"},
-                {"InitialAmount", "M"},
-                {"RelativeContribution", "N"}
-            };
+        public Dictionary<string, string> GetColumnList() {
+            var fileContent = File.ReadAllText("ColumnList.json");
+
+            var columns = JsonConvert.DeserializeObject<Dictionary<string, string>>(fileContent);
 
             return columns;
         }
-        #endregion staticExcelData
+        #endregion File management for excel data
 
         #region updateTextBoxValues
         public void WriteUpdateDataToTextBox(AssetUpdate assetUpdate) {
@@ -366,12 +329,12 @@ namespace AssetTrackingApplication
             return assetClass;
         }
         private void cb_assetName_MouseClick(object sender, MouseEventArgs e) {
-            var assetList = CreateAssetList();
+            var assetList = GetAssetList();
             cb_assetName.DataSource = assetList.Keys.ToList();
         }
 
         private void cb_assetName_TextChanged(object sender, EventArgs e) {
-            var assetList = CreateAssetList();
+            var assetList = GetAssetList();
             var assetName = cb_assetName.Text;
             var assetRow = GetAssetRow(assetList, assetName);
             var assetClass = GetAssetClass(assetRow, assetList, assetName);
@@ -381,7 +344,7 @@ namespace AssetTrackingApplication
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            txt_totalValue.Text = GetTotalValue(_worksheet, CreateColumnList()).ToString();
+            txt_totalValue.Text = GetTotalValue(_worksheet, GetColumnList()).ToString();
             DeactivateControls();
             _excel.CloseExcelFile();
             btn_save.Enabled = false;
