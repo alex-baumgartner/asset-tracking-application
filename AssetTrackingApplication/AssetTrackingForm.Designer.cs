@@ -41,6 +41,9 @@
             this.lb_asset_class = new System.Windows.Forms.Label();
             this.txt_currentValue = new System.Windows.Forms.TextBox();
             this.pn_OverallData = new System.Windows.Forms.Panel();
+            this.btn_createAssetClass = new System.Windows.Forms.Button();
+            this.lbl_totalValue = new System.Windows.Forms.Label();
+            this.txt_totalValue = new System.Windows.Forms.TextBox();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_InitializeAssetInsertion = new System.Windows.Forms.Button();
             this.btn_InitializeUpdate = new System.Windows.Forms.Button();
@@ -62,8 +65,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txt_currentAmount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_totalValue = new System.Windows.Forms.TextBox();
-            this.lbl_totalValue = new System.Windows.Forms.Label();
             this.pn_OverallData.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -91,7 +92,7 @@
             // 
             // dt_currentDate
             // 
-            this.dt_currentDate.Location = new System.Drawing.Point(221, 102);
+            this.dt_currentDate.Location = new System.Drawing.Point(216, 107);
             this.dt_currentDate.Margin = new System.Windows.Forms.Padding(4);
             this.dt_currentDate.Name = "dt_currentDate";
             this.dt_currentDate.Size = new System.Drawing.Size(265, 22);
@@ -101,7 +102,7 @@
             // lbl_currentDate
             // 
             this.lbl_currentDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentDate.Location = new System.Drawing.Point(237, 133);
+            this.lbl_currentDate.Location = new System.Drawing.Point(227, 133);
             this.lbl_currentDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_currentDate.Name = "lbl_currentDate";
             this.lbl_currentDate.Size = new System.Drawing.Size(244, 31);
@@ -123,7 +124,7 @@
             // 
             // txt_assetClass
             // 
-            this.txt_assetClass.Location = new System.Drawing.Point(371, 70);
+            this.txt_assetClass.Location = new System.Drawing.Point(372, 73);
             this.txt_assetClass.Margin = new System.Windows.Forms.Padding(4);
             this.txt_assetClass.Name = "txt_assetClass";
             this.txt_assetClass.Size = new System.Drawing.Size(293, 22);
@@ -165,7 +166,7 @@
             // cb_assetName
             // 
             this.cb_assetName.FormattingEnabled = true;
-            this.cb_assetName.Location = new System.Drawing.Point(28, 70);
+            this.cb_assetName.Location = new System.Drawing.Point(4, 71);
             this.cb_assetName.Margin = new System.Windows.Forms.Padding(4);
             this.cb_assetName.Name = "cb_assetName";
             this.cb_assetName.Size = new System.Drawing.Size(293, 24);
@@ -195,6 +196,7 @@
             // 
             // pn_OverallData
             // 
+            this.pn_OverallData.Controls.Add(this.btn_createAssetClass);
             this.pn_OverallData.Controls.Add(this.lbl_totalValue);
             this.pn_OverallData.Controls.Add(this.txt_totalValue);
             this.pn_OverallData.Controls.Add(this.btn_save);
@@ -209,6 +211,40 @@
             this.pn_OverallData.Name = "pn_OverallData";
             this.pn_OverallData.Size = new System.Drawing.Size(669, 702);
             this.pn_OverallData.TabIndex = 28;
+            // 
+            // btn_createAssetClass
+            // 
+            this.btn_createAssetClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_createAssetClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_createAssetClass.Location = new System.Drawing.Point(371, 185);
+            this.btn_createAssetClass.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_createAssetClass.Name = "btn_createAssetClass";
+            this.btn_createAssetClass.Size = new System.Drawing.Size(293, 61);
+            this.btn_createAssetClass.TabIndex = 37;
+            this.btn_createAssetClass.Text = "Create new Asset Class";
+            this.btn_createAssetClass.UseVisualStyleBackColor = true;
+            this.btn_createAssetClass.Click += new System.EventHandler(this.btn_createAssetClass_Click);
+            // 
+            // lbl_totalValue
+            // 
+            this.lbl_totalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_totalValue.Location = new System.Drawing.Point(227, 480);
+            this.lbl_totalValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_totalValue.Name = "lbl_totalValue";
+            this.lbl_totalValue.Size = new System.Drawing.Size(244, 31);
+            this.lbl_totalValue.TabIndex = 36;
+            this.lbl_totalValue.Text = "Total Value";
+            this.lbl_totalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_totalValue.Visible = false;
+            // 
+            // txt_totalValue
+            // 
+            this.txt_totalValue.Enabled = false;
+            this.txt_totalValue.Location = new System.Drawing.Point(232, 528);
+            this.txt_totalValue.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_totalValue.Name = "txt_totalValue";
+            this.txt_totalValue.Size = new System.Drawing.Size(239, 22);
+            this.txt_totalValue.TabIndex = 35;
             // 
             // btn_save
             // 
@@ -460,28 +496,7 @@
             this.label2.Text = "Current Amount";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txt_totalValue
-            // 
-            this.txt_totalValue.Enabled = false;
-            this.txt_totalValue.Location = new System.Drawing.Point(232, 528);
-            this.txt_totalValue.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_totalValue.Name = "txt_totalValue";
-            this.txt_totalValue.Size = new System.Drawing.Size(239, 22);
-            this.txt_totalValue.TabIndex = 35;
-            // 
-            // lbl_totalValue
-            // 
-            this.lbl_totalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_totalValue.Location = new System.Drawing.Point(227, 480);
-            this.lbl_totalValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_totalValue.Name = "lbl_totalValue";
-            this.lbl_totalValue.Size = new System.Drawing.Size(244, 31);
-            this.lbl_totalValue.TabIndex = 36;
-            this.lbl_totalValue.Text = "Total Value";
-            this.lbl_totalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_totalValue.Visible = false;
-            // 
-            // InsertAssetForm
+            // AssetTrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -490,7 +505,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pn_OverallData);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "InsertAssetForm";
+            this.Name = "AssetTrackingForm";
             this.Text = "Form1";
             this.pn_OverallData.ResumeLayout(false);
             this.pn_OverallData.PerformLayout();
@@ -540,6 +555,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lbl_totalValue;
         private System.Windows.Forms.TextBox txt_totalValue;
+        private System.Windows.Forms.Button btn_createAssetClass;
     }
 }
 

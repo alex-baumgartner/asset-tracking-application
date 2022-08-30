@@ -310,14 +310,8 @@ namespace AssetTrackingApplication
             }
             return assetRow;
         }
-        private List<AssetClass> GetAllAssetClasses()
-        {
-            var jsonData = File.ReadAllText("AssetClasses.json");
-            var assetClasses = JsonConvert.DeserializeObject<List<AssetClass>>(jsonData);
-            return assetClasses;
-        }
         public string GetAssetClass(int assetRow, string assetName) {
-            var assetClasses = GetAllAssetClasses();
+            var assetClasses = AssetClass.GetAllAssetClasses();
             var assetClass = assetClasses.Find(a => (a.FirstRow <= assetRow) && (a.LastRow >= assetRow)); 
             
             return assetClass.Name;
@@ -342,6 +336,12 @@ namespace AssetTrackingApplication
             DeactivateControls();
             _excel.CloseExcelFile();
             btn_save.Enabled = false;
+        }
+
+        private void btn_createAssetClass_Click(object sender, EventArgs e)
+        {
+            var assetClassForm = new AssetClassForm(AssetClass.GetAllAssetClasses());
+            assetClassForm.ShowDialog();
         }
     }
 }

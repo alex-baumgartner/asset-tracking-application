@@ -70,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssetClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssetClassForm.Designer.cs">
+      <DependentUpon>AssetClassForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AssetManagement.cs" />
     <Compile Include="ExcelData.cs" />
     <Compile Include="AssetTrackingForm.cs">
@@ -80,6 +86,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AssetClassForm.resx">
+      <DependentUpon>AssetClassForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AssetTrackingForm.resx">
       <DependentUpon>AssetTrackingForm.cs</DependentUpon>
     </EmbeddedResource>

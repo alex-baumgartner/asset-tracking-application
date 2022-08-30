@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
+using Newtonsoft.Json;
 
 namespace AssetTrackingApplication
 {
@@ -192,7 +193,7 @@ namespace AssetTrackingApplication
             }
         }
     }
-    internal class AssetClass
+    public class AssetClass
     {
         public AssetClass(string name, int firstRow, int lastRow)
         {
@@ -204,5 +205,17 @@ namespace AssetTrackingApplication
         public string Name { get; set; }
         public int  FirstRow { get; set; }
         public int LastRow { get; set; }
+
+        public static List<AssetClass> GetAllAssetClasses()
+        {
+            var jsonData = File.ReadAllText("AssetClasses.json");
+            var assetClasses = JsonConvert.DeserializeObject<List<AssetClass>>(jsonData);
+            return assetClasses;
+        }
+        public static void UpdateAssetClassFile(List<AssetClass> assetClasses)
+        {
+            var content = JsonConvert.SerializeObject(assetClasses, Formatting.Indented);
+            File.WriteAllText("AssetClasses.json", content);
+        }
     }
 }
