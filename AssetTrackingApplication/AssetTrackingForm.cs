@@ -13,11 +13,11 @@ using Newtonsoft.Json;
 
 namespace AssetTrackingApplication
 {
-    public partial class InsertAssetForm : Form {
+    public partial class AssetTrackingForm : Form {
         // set file name
         const string _fullName = @"C:\AssetTracking\AssetTrackingTable.xlsx";
         Excel _excel = new Excel(_fullName);
-        public InsertAssetForm() {
+        public AssetTrackingForm() {
             InitializeComponent();
         }
 

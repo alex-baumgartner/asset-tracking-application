@@ -72,16 +72,16 @@
   <ItemGroup>
     <Compile Include="AssetManagement.cs" />
     <Compile Include="ExcelData.cs" />
-    <Compile Include="InsertAssetForm.cs">
+    <Compile Include="AssetTrackingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InsertAssetForm.Designer.cs">
-      <DependentUpon>InsertAssetForm.cs</DependentUpon>
+    <Compile Include="AssetTrackingForm.Designer.cs">
+      <DependentUpon>AssetTrackingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="InsertAssetForm.resx">
-      <DependentUpon>InsertAssetForm.cs</DependentUpon>
+    <EmbeddedResource Include="AssetTrackingForm.resx">
+      <DependentUpon>AssetTrackingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

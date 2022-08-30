@@ -1,6 +1,6 @@
 ﻿namespace AssetTrackingApplication
 {
-    public partial class InsertAssetForm
+    public partial class AssetTrackingForm
     {
         /// <summary>
         /// Required designer variable.
