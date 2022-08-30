@@ -28,7 +28,7 @@ namespace AssetTrackingApplication
         public decimal TotalValue => PricePerShare * Amount;
         public decimal PreviousValue { get; set; }
         public decimal GainTotal => TotalValue - PreviousValue;
-        public decimal GainRelative => PreviousValue != 0 ? ((TotalValue / PreviousValue) - 1) : TotalValue != 0 ? 1 : 0;
+        public decimal GainRelative => PreviousValue != 0 ? ((TotalValue / PreviousValue) - 1) : TotalValue == 0 ? 0 : 1;
         public decimal InvestedCapital { get; set; }
         public decimal Performance => InvestedCapital != 0 ? (TotalValue - InvestedCapital) / InvestedCapital :0;
 
@@ -191,5 +191,18 @@ namespace AssetTrackingApplication
                 excel.Cells[assetRow, columns["AssetShare"]] = assetValue / totalValue;
             }
         }
+    }
+    internal class AssetClass
+    {
+        public AssetClass(string name, int firstRow, int lastRow)
+        {
+            Name = name;
+            FirstRow = firstRow;
+            LastRow = lastRow;
+        }
+
+        public string Name { get; set; }
+        public int  FirstRow { get; set; }
+        public int LastRow { get; set; }
     }
 }
